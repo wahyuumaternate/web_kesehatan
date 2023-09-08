@@ -19,7 +19,6 @@ class DataController extends Controller
         //     [465,574,473,52,37,15,542] //p
         // ];
         $data = DB::table('data_uji')->select('k', 's','p')->get();
-        $data2 = DB::table('kecamatan')->get();
 
         $dataArray = [];
         foreach ($data as $item) {
@@ -48,14 +47,13 @@ class DataController extends Controller
         
     //     // echo "<br>";
     // }
-        return view('tes',compact('clusters', 'data2'));
+        return view('tes',compact('clusters'));
         
     }
 
     public function d() {
         $data = DB::table('data_uji')->select('k', 's','p')->get();
         $data_all = DB::table('data_uji')->get();
-        $data2 = DB::table('kecamatan')->get();
 
         $dataArray = [];
         foreach ($data as $item) {

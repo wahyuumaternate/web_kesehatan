@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Data extends Model
 {
     use HasFactory;
-    protected $table = 'c';
+    protected $table = 'data_uji';
 }

@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[DataController::class,'d']);
 Route::get('tes/',[DataController::class,'index2']);
 Route::get('d/',[DataController::class,'index']);
+Route::get('dashboard/',function () {
+  return view('admin.index');
+});
