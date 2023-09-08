@@ -12,7 +12,7 @@ use HierarchicalClustering\Links\SingleLink;
 
 class DataController extends Controller
 {
-    public function index()  {
+    public function tes()  {
         // $input = [
         //     [1876, 1967,1755,231,108,52,1773], //k
         //     [853,944,835,97,56,32,872], //s
@@ -51,7 +51,7 @@ class DataController extends Controller
         
     }
 
-    public function d() {
+    public function index() {
         $data = DB::table('data_uji')->select('k', 's','p')->get();
         $data_all = DB::table('data_uji')->get();
 
@@ -82,6 +82,6 @@ class DataController extends Controller
         
     //     // echo "<br>";
     // }
-        return view('index',compact('clusters', 'data_all'));
+        return view('index',compact('clusters','data_all'));
     }
 }

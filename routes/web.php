@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[DataController::class,'d']);
-Route::get('tes/',[DataController::class,'index2']);
-Route::get('d/',[DataController::class,'index']);
-Route::get('dashboard/',function () {
-  return view('admin.index');
+Route::get('/', [DataController::class,'index']);
+
+Route::get('/dashboard', function () {
+    return view('admin.index');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+require __DIR__.'/auth.php';
