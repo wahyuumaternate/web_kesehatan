@@ -92,6 +92,6 @@ class DataController extends Controller
         ]);
         // dd($rules);
         $data_uji->where('id', $data_uji->id)->update($rules);
-        return redirect()->route('data.show')->with('success','Berita Berhasil Di Ubah');
+        return redirect()->route('data.show')->with('success','Data Berhasil Di Ubah');
     }
 }
