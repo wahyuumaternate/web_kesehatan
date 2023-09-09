@@ -24,6 +24,11 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Data</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('data.show') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Hasil Pembagian Cluster</span></a>
+    </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">

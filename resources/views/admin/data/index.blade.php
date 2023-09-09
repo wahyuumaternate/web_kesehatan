@@ -50,7 +50,7 @@
                                             aria-describedby="textHelp" value="{{ $i->p }}" name="p">
                                     </td>
                                     <td>
-                                        <button class="btn btn-success" type="submit">Simpan</button>
+                                        <button class="btn btn-success" type="submit">Ubah</button>
                                     </td>
                                 </form>
                             </tr>
