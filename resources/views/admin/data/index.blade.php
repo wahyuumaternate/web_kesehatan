@@ -2,9 +2,11 @@
 
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Data Mentah</h1>
-
-    <p class="mb-4">Form Tidak Boleh Kosong</p>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-2 text-gray-800">Data Mentah</h1>
+        <a href="/" target="blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-eye fa-sm text-white-50"></i> Lihat Hasil Dalam Bentuk GIS</a>
+    </div>
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <h6> {{ session('success') }}</h6>
@@ -14,7 +16,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Mentah</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Tidak Boleh Kosong</h6>
+
         </div>
         <div class="card-body">
             <div class="table-responsive">
