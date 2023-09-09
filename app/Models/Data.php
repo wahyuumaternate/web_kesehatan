@@ -9,4 +9,9 @@ class Data extends Model
 {
     use HasFactory;
     protected $table = 'data_uji';
+    protected $fillable = [
+        'k',
+        's',
+        'p',
+    ];
 }

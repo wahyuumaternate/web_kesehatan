@@ -12,44 +12,7 @@ use HierarchicalClustering\Links\SingleLink;
 
 class DataController extends Controller
 {
-    public function tes()  {
-        // $input = [
-        //     [1876, 1967,1755,231,108,52,1773], //k
-        //     [853,944,835,97,56,32,872], //s
-        //     [465,574,473,52,37,15,542] //p
-        // ];
-        $data = DB::table('data_uji')->select('k', 's','p')->get();
-
-        $dataArray = [];
-        foreach ($data as $item) {
-            $dataArray[] = [$item->k, $item->s,$item->p];
-        }
-        // dd($dataArray);
-        $object = new Clustering(
-            $dataArray,
-            new EuclideanDistance(),
-            // new ManhattanDistance(),
-            new SingleLink(),
-            4
-        );
-
-        $clusters = $object->getCluster();
-        // dd($clusters);
-     
-        // Looping untuk mengakses dan mencetak isi array
-    // foreach ($clusters as $index => $innerArray) {
-    //     echo "Array $index: ";
-        
-    //     foreach ($innerArray as $value) {
-    //         echo "$value ";
-
-    //     }
-        
-    //     // echo "<br>";
-    // }
-        return view('tes',compact('clusters'));
-        
-    }
+    
 
     public function index() {
         $data = DB::table('data_uji')->select('k', 's','p')->get();
@@ -83,5 +46,52 @@ class DataController extends Controller
     //     // echo "<br>";
     // }
         return view('index',compact('clusters','data_all'));
+    }
+
+    public function tes()  {
+        // $input = [
+        //     [1876, 1967,1755,231,108,52,1773], //k
+        //     [853,944,835,97,56,32,872], //s
+        //     [465,574,473,52,37,15,542] //p
+        // ];
+        $data = DB::table('data_uji')->select('k', 's','p')->get();
+
+        $dataArray = [];
+        foreach ($data as $item) {
+            $dataArray[] = [$item->k, $item->s,$item->p];
+        }
+        // dd($dataArray);
+        $object = new Clustering(
+            $dataArray,
+            new EuclideanDistance(),
+            // new ManhattanDistance(),
+            new SingleLink(),
+            4
+        );
+
+        $clusters = $object->getCluster();
+        // dd($clusters);
+     
+        // Looping untuk mengakses dan mencetak isi array
+
+        return view('tes',compact('clusters'));
+        
+    }
+
+    public function show() {
+
+        return view('admin.data.index',[
+            'data'=>Data::all()
+        ]);
+    }
+    public function update(Request $request, Data $data_uji) {
+        $rules = $request->validate([
+            'k'=>['required'],
+            's' => 'required',
+            'p' => 'required',
+        ]);
+        // dd($rules);
+        $data_uji->where('id', $data_uji->id)->update($rules);
+        return redirect()->route('data.show')->with('success','Berita Berhasil Di Ubah');
     }
 }

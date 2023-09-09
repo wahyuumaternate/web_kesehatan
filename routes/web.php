@@ -26,5 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard/data', [DataController::class, 'show'])->name('data.show');
+    Route::post('/dashboard/data\{data_uji:nama_kecamatan}', [DataController::class, 'update'])->name('data.update');
+});
 
 require __DIR__.'/auth.php';
