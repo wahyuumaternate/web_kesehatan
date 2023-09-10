@@ -84,6 +84,8 @@ class DataController extends Controller
             'data'=>Data::all()
         ]);
     }
+
+
     public function update(Request $request, Data $data_uji) {
         $rules = $request->validate([
             'k'=>['required'],
@@ -93,5 +95,31 @@ class DataController extends Controller
         // dd($rules);
         $data_uji->where('id', $data_uji->id)->update($rules);
         return redirect()->route('data.show')->with('success','Data Berhasil Di Ubah');
+    }
+
+    public function hasilCluster()  {
+        $data = DB::table('data_uji')->select('k', 's','p')->get();
+        $data2 = DB::table('kecamatan')->get();
+
+        $dataArray = [];
+        foreach ($data as $item) {
+            $dataArray[] = [$item->k, $item->s,$item->p];
+        }
+        // dd($dataArray);
+        $object = new Clustering(
+            $dataArray,
+            new EuclideanDistance(),
+            // new ManhattanDistance(),
+            new SingleLink(),
+            4
+        );
+
+        $clusters = $object->getCluster();
+        // dd($clusters);
+     
+        // Looping untuk mengakses dan mencetak isi array
+
+        return view('admin.hasilCluster',compact('clusters','data2'));
+        
     }
 }

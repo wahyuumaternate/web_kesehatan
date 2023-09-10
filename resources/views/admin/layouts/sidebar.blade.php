@@ -25,19 +25,19 @@
             <span>Data</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('data.show') }}">
+        <a class="nav-link" href="{{ route('hasilCluster') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Hasil Pembagian Cluster</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{ route('profile.edit') }}">
             <i class="fas fa-fw fa-user"></i>
             <span>Profil Pengguna</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{ route('register') }}">
             <i class="fas fa-fw fa-users"></i>
             <span>Kelola Akun Pengguna</span></a>
     </li>

@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Admin Panel</title>
-
+    <link rel="icon" href="{{ asset('assets/img/tongitlogo.png') }}">
     <!-- Custom fonts for this template-->
     <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -21,6 +21,7 @@
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    @yield('head')
 
 </head>
 
@@ -113,6 +114,7 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('admin/js/demo/datatables-demo.js') }}"></script>
+    @yield('js')
 
 </body>
 

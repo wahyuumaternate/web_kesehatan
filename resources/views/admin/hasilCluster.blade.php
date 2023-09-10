@@ -1,31 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>SISTEM INFORMASI GOEGRAFIS PENGELOMPOKAN TINGKAT KESEHATAN LINGKUNGAN</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link rel="icon" href="{{ asset('favicon.ico') }}">
-    {{-- <link href="{{ asset('assets/img/tongitlogo.png') }}" rel="apple-touch-icon"> --}}
-
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-
+@extends('admin.layouts.main')
+@section('head')
     {{-- gis --}}
     <link rel="stylesheet" href="{{ asset('css/leaflet.css') }}">
     <link rel="stylesheet" href="{{ asset('css/qgis2web.css') }}">
@@ -36,51 +10,50 @@
             height: 616px;
         }
     </style>
-
-    <!-- Template Main CSS File -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-
-</head>
-
-<body>
-
-
-    @yield('body')
-
-
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-        <div class="container">
-            <p>SISTEM INFORMASI GOEGRAFIS PENGELOMPOKAN TINGKAT KESEHATAN LINGKUNGAN</p>
-            {{-- <div class="social-links">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-            </div> --}}
-            <div class="copyright">
-                &copy; Copyright <strong><span>Universitas Khairun</span></strong>. All Rights Reserved
+@endsection
+@section('content')
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Hasil Pembagian Clusters</h1>
+    <div class="card shadow mb-4">
+        <!-- Card Header - Accordion -->
+        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
+            aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-primary">Dalam Bentuk Text</h6>
+        </a>
+        <!-- Card Content - Collapse -->
+        <div class="collapse show" id="collapseCardExample" style="">
+            <div class="card-body">
+                <ul class="list-group">
+                    @foreach ($clusters as $i => $cluster)
+                        @foreach ($cluster as $item)
+                            @foreach ($data2 as $j => $kecamatan)
+                                @if ($item == $kecamatan->index)
+                                    <li class="list-group-item"> Cluster {{ $i + 1 }} Kecamatan
+                                        {{ $kecamatan->nama_kecamatan }}</li>
+                                @endif
+                            @endforeach
+                        @endforeach
+                    @endforeach
+                </ul>
             </div>
         </div>
-    </footer><!-- End Footer -->
-
-    <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Vendor JS Files -->
-    <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
-    <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/typed.js/typed.umd.js') }}"></script>
-    <script src="{{ asset('assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-
+    </div>
+    <div class="card shadow mb-4">
+        <!-- Card Header - Accordion -->
+        <a href="#dalambentukmap" class="d-block card-header py-3" data-toggle="collapse" role="button"
+            aria-expanded="true" aria-controls="dalambentukmap">
+            <h6 class="m-0 font-weight-bold text-primary">Dalam Bentuk Map</h6>
+        </a>
+        <!-- Card Content - Collapse -->
+        <div class="collapse show" id="dalambentukmap" style="">
+            <div class="card-body">
+                <div id="map">
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('js')
     {{-- gis --}}
     <script src="{{ asset('js/qgis2web_expressions.js') }}"></script>
     <script src="{{ asset('js/leaflet.js') }}"></script>
@@ -119,8 +92,8 @@
         function pop_BATAS_DESA_DESEMBER_2019_DUKCAPIL_MALUKU_UTARA_0(feature, layer) {
             var popupContent =
                 '<table>\
-                                                                                                                                                                    <tr>\
-                                                                                                                                                                        <td colspan="2">' +
+                                                                                                                                                                        <tr>\
+                                                                                                                                                                            <td colspan="2">' +
                 (
                     feature
                     .properties[
@@ -133,8 +106,8 @@
                             'DESA']
                         .toLocaleString()) : '') +
                 '</td>\                                                                                                                                    <tr>\
-                                                                                                                                                                        <th scope="row">PROVINSI</th>\
-                                                                                                                                                                        <td>' +
+                                                                                                                                                                            <th scope="row">PROVINSI</th>\
+                                                                                                                                                                            <td>' +
                 (
                     feature
                     .properties[
@@ -146,10 +119,10 @@
                         .properties[
                             'PROVINSI'].toLocaleString()) : '') +
                 '</td>\
-                                                                                                                                                                    </tr>\
-                                                                                                                                                                    <tr>\
-                                                                                                                                                                        <th scope="row">KAB_KOTA</th>\
-                                                                                                                                                                        <td>' +
+                                                                                                                                                                        </tr>\
+                                                                                                                                                                        <tr>\
+                                                                                                                                                                            <th scope="row">KAB_KOTA</th>\
+                                                                                                                                                                            <td>' +
                 (
                     feature
                     .properties[
@@ -161,10 +134,10 @@
                         .properties[
                             'KAB_KOTA'].toLocaleString()) : '') +
                 '</td>\
-                                                                                                                                                                    </tr>\
-                                                                                                                                                                    <tr>\
-                                                                                                                                                                        <th scope="row">KECAMATAN</th>\
-                                                                                                                                                                        <td>' +
+                                                                                                                                                                        </tr>\
+                                                                                                                                                                        <tr>\
+                                                                                                                                                                            <th scope="row">KECAMATAN</th>\
+                                                                                                                                                                            <td>' +
                 (
                     feature
                     .properties[
@@ -176,9 +149,9 @@
                         .properties[
                             'KECAMATAN'].toLocaleString()) : '') +
                 '</td>\
-                                                                                                                                                                    </tr>\
-                                                                                                                                                                    <tr>\
-                                                                                                                                                                        <td colspan="2">' +
+                                                                                                                                                                        </tr>\
+                                                                                                                                                                        <tr>\
+                                                                                                                                                                            <td colspan="2">' +
                 (
                     feature
                     .properties[
@@ -189,13 +162,13 @@
                         feature
                         .properties['DESA_KELUR'].toLocaleString()) : '') +
                 '</td>\
-                                                                                                                                                                    </tr>\
-                                                                                                                                                                    <tr>\
-                                                                                                                                                                        <td colspan="2">' +
+                                                                                                                                                                        </tr>\
+                                                                                                                                                                        <tr>\
+                                                                                                                                                                            <td colspan="2">' +
 
                 '</td>\
-                                                                                                                                                                    </tr>\
-                                                                                                                                                                </table>';
+                                                                                                                                                                        </tr>\
+                                                                                                                                                                    </table>';
             layer.bindPopup(popupContent, {
                 maxHeight: 400
             });
@@ -305,10 +278,4 @@
             resetLabels([layer_BATAS_DESA_DESEMBER_2019_DUKCAPIL_MALUKU_UTARA_0]);
         });
     </script>
-
-    <!-- Template Main JS File -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-
-</body>
-
-</html>
+@endsection

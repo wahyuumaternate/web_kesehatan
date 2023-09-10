@@ -4,9 +4,11 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-2 text-gray-800">Data Mentah</h1>
-        <a href="/" target="blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-eye fa-sm text-white-50"></i> Lihat Hasil Dalam Bentuk GIS</a>
+        <a href="{{ route('hasilCluster') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-eye fa-sm text-white-50"></i>
+            Lihat Hasil Dalam Bentuk GIS dan Text</a>
     </div>
+    <p>Saat Data di Tambahkan Atau di Ubah Hasil Akan Otomatis Tergenerate</p>
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <h6> {{ session('success') }}</h6>
